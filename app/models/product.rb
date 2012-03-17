@@ -1,4 +1,10 @@
 class Product < ActiveRecord::Base
+  has_many :line_items
+
+  # Call a hook method before deleting row from database
+  # If hook method returns false, row will not be destroyed
+  before_destroy :ensure_not_referenced_by_any_line_item
+
   validates :title, :description, :image_url, presence: true
   validates :title, length: { 
     minimum: 10, 
@@ -10,4 +16,17 @@ class Product < ActiveRecord::Base
     with: %r{\.(gif|jpg|png)$}i,
     message: 'must be a URL for GIF, JPG or PNG image.'
   }
+
+  private
+
+    # Hook method called by before_destroy
+    def ensure_not_referenced_by_any_line_item
+      if line_items.empty?
+        return true
+      else
+        # Associate this error with the base object itself
+        errors.add(:base, 'Line Items present')
+        return false
+      end
+    end
 end

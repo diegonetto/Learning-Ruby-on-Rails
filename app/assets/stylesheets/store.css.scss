@@ -40,6 +40,10 @@
       margin-bottom: 0.8em; 
     }
 
+    form, div {
+      display: inline;
+    }
+
     .price {
       color: #44a;
       font-weight: bold;
