@@ -1,8 +1,13 @@
 require 'test_helper'
 
 class CartsControllerTest < ActionController::TestCase
+  fixtures :products
+
   setup do
     @cart = carts(:one)
+    @book_one = products(:ruby)
+    @cart_2 = carts(:two)
+    @cart_2.add_product(@book_one.id, @book_one.price).save!
   end
 
   test "should get index" do
@@ -25,7 +30,7 @@ class CartsControllerTest < ActionController::TestCase
   end
 
   test "should show cart" do
-    get :show, id: @cart
+    get :show, id: @cart_2
     assert_response :success
   end
 

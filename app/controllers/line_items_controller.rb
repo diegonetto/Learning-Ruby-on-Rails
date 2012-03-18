@@ -44,7 +44,7 @@ class LineItemsController < ApplicationController
     # the current cart for this session, or creates a new one.
     @cart = current_cart
     product = Product.find(params[:product_id])
-    @line_item = @cart.add_product(product.id)
+    @line_item = @cart.add_product(product.id, product.price)
 
     # Reset catalog view counter in session
     session[:counter] = 0  
@@ -83,7 +83,8 @@ class LineItemsController < ApplicationController
     @line_item.destroy
 
     respond_to do |format|
-      format.html { redirect_to line_items_url }
+      format.html { redirect_to @line_item.cart,
+        notice: 'Product successfully removed' }
       format.json { head :no_content }
     end
   end
