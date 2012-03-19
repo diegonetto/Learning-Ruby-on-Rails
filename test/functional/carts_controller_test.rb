@@ -35,7 +35,7 @@ class CartsControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, id: @cart
+    get :edit, id: @cart_2
     assert_response :success
   end
 
