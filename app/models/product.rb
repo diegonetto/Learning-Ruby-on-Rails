@@ -1,5 +1,6 @@
 class Product < ActiveRecord::Base
   has_many :line_items
+  has_many :orders, through: :line_items
 
   # Call a hook method before deleting row from database
   # If hook method returns false, row will not be destroyed

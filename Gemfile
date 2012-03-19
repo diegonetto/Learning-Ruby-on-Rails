@@ -36,3 +36,6 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+# Inform Rails we will be using the will_paginate plugin
+gem 'will_paginate', '~> 3.0'

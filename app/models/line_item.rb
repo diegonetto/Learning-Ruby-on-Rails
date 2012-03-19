@@ -6,6 +6,7 @@ class LineItem < ActiveRecord::Base
   #     a belongs_to for each.
   belongs_to :product
   belongs_to :cart
+  belongs_to :order 
 
   def total_price
     price
