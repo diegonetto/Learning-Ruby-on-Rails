@@ -14,7 +14,7 @@ Depot::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -34,4 +34,19 @@ Depot::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Settings for AWS SES
+  Depot::Application.configure do
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.default_url_options = { host: "gmail.com" }    
+    config.action_mailer.smtp_settings = {
+      address:        "email-smtp.us-east-1.amazonaws.com",
+      port:           465,
+      domain:         "gmail.com",
+      authentication: :login,
+      user_name:      "AKIAICLXK5LWFHZ5D4RA",	
+      password:       "AnNYcvIISeYi41WsAnCGrJBCNAFD9o52rIyq1rV41UwJ",
+    }
+  end
+
 end
