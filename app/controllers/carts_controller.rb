@@ -86,5 +86,11 @@ class CartsController < ApplicationController
       format.js
       format.json { head :no_content }
     end
+
+    # Redirect to catalog if emptying cart on a order page
+    if request.url.include? "orders/new"
+      @redirect = true
+    end
+  
   end
 end

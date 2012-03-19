@@ -31,6 +31,9 @@ class OrdersController < ApplicationController
       return
     end
 
+    # Hide the checkout button
+    @hide_checkout = true;
+
     @order = Order.new
 
     respond_to do |format|
