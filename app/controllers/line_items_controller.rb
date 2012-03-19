@@ -82,8 +82,19 @@ class LineItemsController < ApplicationController
   def destroy
     @cart = current_cart
     @line_item = LineItem.find(params[:id])
-    @line_item.destroy
+
+    # Decrement the quantity 
+    if @line_item.quantity > 1
+      @line_item.quantity -= 1
+      @line_item.save!
+    else 
+      @line_item.destroy
+    end
+   
+    # Set the variable to decide if the cart should be re-hidden
     @hide_cart = @cart.line_items.empty?
+
+    @current_item = @line_item
 
     respond_to do |format|
       format.html { redirect_to @line_item.cart,
